@@ -1,0 +1,251 @@
+/*
+ * Default table styles plus a few styling variants.
+ * auto-zebra:  automatically switch to zebra striping when exceeding a defined number of rows
+ * form:        for form layouts; no padding
+ * airy:        increased whitespace
+ * scrollable:  with scrollbars and fixed height
+ * row-hovers:  apply hover effect to rows
+ *
+ * Usage:
+ *
+ * <table class="table table--row-hovers">
+ *     <thead>
+ *         <tr>
+ *             <th>Item<th>
+ *             <th colspan="2">Price<th>
+ *         </tr>
+ *     </thead>
+ *     <tbody>
+ *         <tr>
+ *             <td>Item 1<td>
+ *             <td class="number">10<td>
+ *             <td>€<td>
+ *         </tr>
+ *         <tr>
+ *             <td>Item 2<td>
+ *             <td class="number">50<td>
+ *             <td>€<td>
+ *         </tr>
+ *         <tr>
+ *             <td>Item 2.1<td>
+ *             <td class="number">20<td>
+ *             <td>€<td>
+ *         </tr>
+ *         <tr>
+ *             <td>Item 2.1<td>
+ *             <td class="number">30<td>
+ *             <td>€<td>
+ *         </tr>
+ *         <tr class="summary-row">
+ *             <td>Total<td>
+ *             <td class="number">60<td>
+ *             <td>€<td>
+ *         </tr>
+ *     </tbody>
+ * </table>
+ */
+
+/* stylelint-disable declaration-colon-space-after, function-parentheses-space-inside, function-comma-space-after */
+/* Because stylelint does not understand SCSS variable definitions */
+$inuit-base-spacing-unit:       14px !default;
+
+$font-size:                     14px !default;
+$font-size\+:                    2 * $font-size !default;
+
+$text--lighter:                 hsl( 83,   2%,  60%) !default;
+
+$background--white:             hsl(  0,   0%, 100%) !default;
+$background--lighter:           hsl( 83,   2%,  94%) !default;
+$background--highlight:         hsl(201, 100%,  94%) !default;
+
+$border--lighter:               hsl( 83,   2%,  92%) !default;
+$border--darker:                hsl( 83,   2%,  52%) !default;
+
+$transition-time--very-fast:    75ms !default;
+
+$zebra-striping-threshold:      6 !default;
+/* stylelint-enable */
+
+
+table {
+    margin-bottom: 0;
+}
+
+th {
+    color: $text--lighter;
+    font-weight: normal;
+    padding: .25em 1em .25em .25em;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+td,
+tbody th {
+    padding: .25em;
+    vertical-align: top;
+}
+
+td.number,
+.number-cell {
+    text-align: right;
+
+    big {
+        font-size: $font-size\+;
+    }
+
+    big + small,
+    big + sup {
+        margin-left: .5em;
+        top: -1.2em;
+    }
+}
+
+tr.summary-row {
+
+    td,
+    th {
+        font-weight: bold;
+    }
+}
+
+tr.details-row {
+
+    td,
+    th {
+        color: $text--lighter;
+    }
+}
+
+tr.unconfirmed-row {
+
+    td,
+    th {
+        color: $text--lighter;
+        font-style: italic;
+    }
+}
+
+
+.table {
+
+    th,
+    td {
+        padding: .5em .75em;
+    }
+
+    thead tr {
+        border-bottom: thin solid $border--darker;
+    }
+
+    tbody {
+
+        tr {
+
+            /*
+             * 1 - Separate rows with a border (border-bottom except on last row)
+             */
+            &:not(:last-of-type) {
+                border-bottom: 1px solid $border--lighter; /* 1 */
+            }
+        }
+    }
+
+    tfoot tr {
+        border-top: thin solid $border--darker;
+    }
+}
+
+.table--form {
+
+    td,
+    tbody th {
+        padding: 1em 1em 1em .5em;
+    }
+
+    input {
+        margin-top: -.5em;
+    }
+
+    h2 {
+        margin-bottom: 0;
+    }
+
+    @include media-query(palm) {
+
+        td,
+        tbody th {
+            display: inline-block;
+            padding: .5em .5em .5em .25em;
+            vertical-align: top;
+        }
+    }
+}
+
+.table--airy {
+
+    th,
+    td {
+        padding-bottom: 1em;
+        padding-top: 1em;
+    }
+}
+
+.table--row-hovers {
+
+    tr {
+        transition: background $transition-time--very-fast ease-out;
+
+        &:hover {
+            background: $background--highlight !important;
+        }
+    }
+}
+
+.table--scrollable {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.table--auto-zebra {
+
+    // if there are $zebra-striping-threshold or more rows, apply zebra-striping to rows instead of borders
+    tr:nth-last-child(n + $zebra-striping-threshold) ~ tr,
+    tr:nth-last-child(n + $zebra-striping-threshold):first-child {
+        border-bottom: 0 none !important;
+
+        &:nth-child(even) {
+            background: $background--lighter;
+        }
+    }
+}
+
+
+.table--responsive__wrapper {
+    position: relative;
+
+    &:after {
+        @include pin(top-right, absolute);
+
+        content: '';
+        display: block;
+        height: 100%;
+        width: 1.5em;
+    }
+
+    > div {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    @include media-query(palm) {
+
+        /*
+         * 1 - 2.25em = 0.75em + 1.5em from &:after
+         */
+        th:last-of-type,
+        td:last-of-type {
+            padding-right: 2.25em; /* 1 */
+        }
+    }
+}

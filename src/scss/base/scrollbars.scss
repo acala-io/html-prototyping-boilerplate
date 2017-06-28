@@ -1,0 +1,25 @@
+/*
+ * HTML5 scrollbars.
+ */
+
+/*
+ * 1 - Width of horizontal scrollbars
+ * 2 - Width of vertical scrollbars
+ */
+::-webkit-scrollbar {
+    height: 10px; /* 1 */
+    width: 10px; /* 2 */
+
+    &-track {
+        background: $background--lighter;
+    }
+
+    &-thumb {
+        background: $text--lightest;
+        border-radius: $border-radius--pill;
+    }
+}
+
+.card ::-webkit-scrollbar-track {
+    border-bottom-right-radius: $border-radius\+;
+}

@@ -1,0 +1,119 @@
+/*
+ * SVG icons.
+ *
+ * Usage:
+ *
+ * <svg role="img" viewBox="0 0 84 84" class="icon icon--small">
+ *     <path d="..."></path>
+ * </svg>
+ */
+
+/* stylelint-disable declaration-colon-space-after, function-parentheses-space-inside, function-comma-space-after */
+/* Because stylelint does not understand SCSS variable definitions */
+$inuit-base-spacing-unit: 14px !default;
+/* stylelint-enable */
+
+
+.icon {
+    display: inline-block;
+    fill: currentColor;
+    height: $inuit-base-font-size * 3;
+    transition: $transition-time--fast transform;
+    vertical-align: middle;
+    width: $inuit-base-font-size * 3;
+
+    &--tiny {
+        height: $inuit-base-font-size;
+        width: $inuit-base-font-size;
+    }
+
+    &--small {
+        height: $inuit-base-font-size * 2;
+        width: $inuit-base-font-size * 2;
+    }
+
+    &--big {
+        height: $inuit-base-font-size * 6;
+        width: $inuit-base-font-size * 6;
+    }
+
+    &--framed {
+        border: 1px solid $clickable;
+        border-radius: $border-radius;
+    }
+
+    &--light {
+        fill: $text--lightest;
+    }
+}
+
+
+// special icons ---------------------------------------------------------------
+.icon--budget-effect {
+
+    &__earning {
+        fill: $status--green;
+        visibility: hidden;
+    }
+
+    &__spending {
+        fill: $status--red;
+        visibility: hidden;
+    }
+
+    &__insufficient {
+        fill: $status--red;
+        visibility: hidden;
+    }
+
+    &__fill {
+        fill: $background--darker;
+        visibility: hidden;
+    }
+
+    &.is-earning {
+
+        .icon--budget-effect__earning,
+        .icon--budget-effect__fill {
+            visibility: visible;
+        }
+    }
+
+    &.is-spending {
+
+        .icon--budget-effect__spending,
+        .icon--budget-effect__fill {
+            visibility: visible;
+        }
+    }
+
+    &.is-insufficient {
+
+        .icon--budget-effect__insufficient {
+            visibility: visible;
+        }
+    }
+}
+
+
+// special icon animations -----------------------------------------------------
+.is-loading > .icon--pdf {
+
+    .icon--pdf__logo {
+        animation: 600ms spin infinite;
+        animation-fill-mode: both;
+        transform-origin: 44% 51%;
+    }
+}
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg) scale(.9) translateX(2px);
+    }
+
+    to {
+        transform: rotate(360deg) scale(.9) translateX(2px);
+    }
+
+}

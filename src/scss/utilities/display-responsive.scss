@@ -1,0 +1,87 @@
+/*
+ * Generic responsive helper classes.
+ */
+
+/* stylelint-disable declaration-colon-space-after */
+/* Because stylelint does not understand SCSS variable definitions */
+$enable-responsive-display:    false !default;
+$enable-responsive-position:   false !default;
+$enable-responsive-float:      false !default;
+/* stylelint-enable */
+
+
+/* Loop over our breakpoints defined in _settings.responsive.scss */
+@each $breakpoint in $breakpoints {
+
+    /* Get the name of the breakpoint */
+    $alias: nth($breakpoint, 1);
+
+    @include media-query($alias) {
+        @if ($enable-responsive-display == true) {
+
+            .inline-#{$alias} {
+                /* stylelint-disable declaration-no-important */
+                /* intended trump */
+                display: inline !important;
+                /* stylelint-enable */
+            }
+
+            .inline-block-#{$alias} {
+                /* stylelint-disable declaration-no-important */
+                /* intended trump */
+                display: inline-block !important;
+                /* stylelint-enable */
+            }
+
+            .block-#{$alias} {
+                /* stylelint-disable declaration-no-important */
+                /* intended trump */
+                display: block !important;
+                /* stylelint-enable */
+            }
+
+            .none-#{$alias} {
+                /* stylelint-disable declaration-no-important */
+                /* intended trump */
+                display: none !important;
+                /* stylelint-enable */
+            }
+        }
+
+        @if ($enable-responsive-position == true) {
+
+            .absolute-#{$alias} {
+                position: absolute;
+            }
+
+            .relative-#{$alias} {
+                position: relative;
+            }
+
+            .static-#{$alias} {
+                position: static;
+            }
+
+            .fixed-#{$alias} {
+                position: fixed;
+            }
+        }
+
+        @if ($enable-responsive-float == true) {
+
+            .left-#{$alias} {
+                /* stylelint-disable declaration-no-important */
+                /* intended trump */
+                float: left !important;
+                /* stylelint-enable */
+            }
+
+            .right-#{$alias} {
+                /* stylelint-disable declaration-no-important */
+                /* intended trump */
+                float: right !important;
+                /* stylelint-enable */
+            }
+        }
+    }
+}

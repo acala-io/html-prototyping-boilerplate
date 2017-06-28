@@ -1,0 +1,7 @@
+# Config file for browserslist (https://github.com/ai/browserslist).
+# Browsers we support:
+
+> 5%              # browserslist still breaks when restricting to Germany: > 5% in DE
+last 2 versions
+not ie < 10
+not op_mini < 9   # fuckoff

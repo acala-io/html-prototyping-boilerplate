@@ -1,0 +1,160 @@
+/*
+ * Default print styles.
+ */
+
+.do-print-only {
+    @include do-print-only;
+}
+
+@media print {
+    /* stylelint-disable declaration-no-important, unit-whitelist */
+    /* we are dealing with print styles here, therefore we allow !important trumps and "mm" and "pt" as unit */
+    @page {
+        // margin: 15mm 12mm 20mm;
+        /* stylelint-disable value-keyword-case */
+        /* false positive, A4 is actually written in uppercase, see https://www.w3.org/TR/css3-page/ */
+        size: A4;
+        /* stylelint-enable value-keyword-case */
+    }
+
+    /*
+     * 1 - No shadows. Ever.
+     */
+    /* stylelint-disable selector-no-universal */
+    /* intended trump: we want this to apply to everything */
+    *,
+    *:before,
+    *:after {
+        box-shadow: none !important; /* 1 */
+        text-shadow: none !important; /* 1 */
+    }
+    /* stylelint-enable selector-no-universal */
+
+    html,
+    body {
+        height: 297mm;
+        width: 210mm;
+    }
+
+    body {
+        background: none;
+        color: $text;
+        /* stylelint-disable value-keyword-case */
+        /* all the font names are false positives imo */
+        font-family: Open Sans, Helvetica, Arial, sans-serif;
+        /* stylelint-enable value-keyword-case */
+        font-size: 10pt !important;
+        letter-spacing: .2pt;
+        line-height: 1.3;
+        margin: 0;
+        padding: 0;
+        word-spacing: 1.1pt;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        /* stylelint-disable no-unsupported-browser-features */
+        /* Pretty sure this is a false positive! */
+        page-break-after: avoid;
+        /* stylelint-enable no-unsupported-browser-features */
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 1em 0;
+        /* stylelint-disable no-unsupported-browser-features */
+        /* Pretty sure this is a false positive! */
+        page-break-after: avoid;
+        /* stylelint-enable no-unsupported-browser-features */
+    }
+
+    h1 {
+        font-size: 18pt !important;
+        margin: 0 0 1em;
+    }
+
+    h2 {
+        font-size: 14pt !important;
+    }
+
+    h3,
+    h4 {
+        font-size: 10pt !important;
+    }
+
+    p {
+        margin: 0 0 .5em;
+    }
+
+    a {
+        color: $text;
+        text-decoration: none;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        /* stylelint-disable no-unsupported-browser-features */
+        /* Pretty sure this is a false positive! */
+        page-break-inside: avoid;
+        /* stylelint-enable no-unsupported-browser-features */
+    }
+
+    /*
+     * 1 - Don't print image larger than page is wide
+     */
+    img {
+        max-width: 100% !important; /* 1 */
+    }
+
+
+    // Print helper classes ------------------------------------------------------------------------
+    .dont-print {
+        @include dont-print;
+    }
+
+    .do-print {
+        @include do-print;
+    }
+
+    /*
+     * 1 - Make sure we got no funny business going on
+     */
+    .page-break {
+        clear: both; /* 1 */
+        display: block; /* 1 */
+
+        &--before {
+            /* stylelint-disable no-unsupported-browser-features */
+            /* Pretty sure this is a false positive! */
+            page-break-before: always;
+            break-before: page;
+            /* stylelint-enable no-unsupported-browser-features */
+        }
+
+        &--after {
+            /* stylelint-disable no-unsupported-browser-features */
+            /* Pretty sure this is a false positive! */
+            page-break-after: always;
+            break-after: page;
+            /* stylelint-enable no-unsupported-browser-features */
+        }
+    }
+}
+/* stylelint-enable */

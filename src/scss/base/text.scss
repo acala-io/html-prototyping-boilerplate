@@ -1,0 +1,80 @@
+/*
+ * Default text styles for various elements.
+ */
+
+/* stylelint-disable declaration-colon-space-after, function-parentheses-space-inside, function-comma-space-after */
+/* Because stylelint does not understand SCSS variable definitions */
+$font-size:                 14px !default;
+$font-size--larger:         1.5 * $font-size !default;
+$font-size\+\+:               3 * $font-size !default;
+
+$text--lighter:             hsl( 83,   2%,  60%) !default;
+/* stylelint-enable */
+
+
+html {
+    /* stylelint-disable property-unit-blacklist */
+    /* This is the one place, where we set the root font-size in pixels */
+    // font-size: 14px; => done via $inuit-base-font-size
+    /* stylelint-enable */
+}
+
+body {
+    /* stylelint-disable value-keyword-case */
+    /* all the font names are false positives imo */
+    font-family: Open Sans, Helvetica Neue, Calibri, Roboto, sans-serif;
+    /* stylelint-enable */
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+dfn {
+    color: $text--lighter;
+    font-style: italic;
+}
+
+cite {
+    font-style: normal;
+}
+
+sub,
+sup {
+    font-size: 50%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -.75em;
+}
+
+sub {
+    bottom: -.33em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: normal;
+}
+
+h1 {
+    font-size: $font-size\+;
+    text-align: center;
+}
+
+h2 {
+    font-size: $font-size--larger;
+}

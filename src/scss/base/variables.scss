@@ -1,0 +1,105 @@
+/*
+ * Global variables.
+ */
+
+
+// colors ------------------------------------------------------------------------------------------
+// primary color
+$primary:                           hsl( 83,  42%,  60%);
+$primary--darker:                   desaturate(darken($primary, 17%), 2%);
+$primary--highlight:                saturate(lighten($primary, 5%), 8%);
+
+// colors for clickable items (links, buttons, etc.)
+$clickable:                         hsl(201,  87%,  68%);
+$clickable--highlight:              hsl(201,  92%,  74%);
+
+// text colors
+$text:                              hsl( 83,   2%,  26%);
+$text--lighter:                     hsl( 83,   2%,  60%);
+$text--lightest:                    hsl( 83,   2%,  78%);
+$text--inverse:                     hsl(  0,   0%, 100%);
+
+// background colors
+$background:                        hsl( 83,   2%,  91%);
+$background--darker:                hsl( 83,   2%,  60%);
+$background--darkest:               hsl( 83,   2%,  42%);
+$background--lighter:               hsl( 83,   2%,  94%);
+$background--slightly-off-white:    hsl( 83,   1%,  99%);
+$background--white:                 hsl(  0,   0%, 100%);
+$background--highlight:             hsl(201, 100%,  94%);
+$background--warning:               hsl(  4,  90%,  94%);
+
+// border colors
+$border:                            hsl( 83,   2%,  84%);
+$border--darker:                    hsl( 83,   2%,  52%);
+$border--lighter:                   hsl( 83,   2%,  92%);
+
+// state colors
+$error:                             hsl(  4,  90%,  58%);
+$status--red:                       hsl(  0,  88%,  66%);
+$status--yellow:                    hsl( 48, 100%,  60%);
+$status--green:                     hsl( 84,  43%,  60%);
+$status--attention:                 hsl( 48, 100%,  89%);
+
+$transparent:                       transparent;
+
+
+// border radii ------------------------------------------------------------------------------------
+$border-radius:                     3px;
+$border-radius-:                    2px;
+$border-radius--:                   1px;
+$border-radius\+:                   $border-radius * 2;
+$border-radius\+\+:                 $border-radius * 3;
+$border-radius--circle:             50%;
+$border-radius--pill:               999px;
+
+
+// transition times --------------------------------------------------------------------------------
+$transition-time--very-fast:        75ms;
+$transition-time--fast:             150ms;
+$transition-time--medium:           250ms;
+$transition-time--slow:             400ms;
+$transition-time--very-slow:        1000ms;
+
+$transition-style--dynamic:         cubic-bezier(.73, .01, 0, 1);
+
+
+// z-indexes ---------------------------------------------------------------------------------------
+$z--recessed:                       -1;
+$z--base:                           0;
+
+// elements on the base layer that need to stick out
+$z--elevated-1:                     10;
+$z--elevated-2:                     11;
+$z--elevated-3:                     12;
+
+// elements that float over the base layer
+$z--overlayed-1:                    100;
+$z--overlayed-2:                    110;
+$z--overlayed-3:                    120;
+
+// elements that must never be covered
+$z--topmost-1:                      1000000;
+$z--topmost-2:                      1000010;
+$z--topmost-3:                      1000020;
+
+
+// font sizes --------------------------------------------------------------------------------------
+$font-size:                         1rem; // = 14px $inuit-base-font-size
+$font-size--:                       .714rem;
+$font-size-:                        .857rem;
+$font-size--large:                  1.25rem;
+$font-size--larger:                 1.5rem;
+$font-size\+:                       2rem;
+$font-size\+\+:                     4rem;
+
+
+// inuit settings ----------------------------------------------------------------------------------
+$breakpoints: (
+    'palm'          'screen and (max-width: 53.99em)',
+    'lap'           'screen and (min-width: 54em) and (max-width: 73.99em)',
+    'lap-and-up'    'screen and (min-width: 54em)',
+    'portable'      'screen and (max-width: 73.99em)',
+    'desk'          'screen and (min-width: 74em)',
+    'retina'        '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)'
+);

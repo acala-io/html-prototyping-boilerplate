@@ -1,0 +1,20 @@
+{
+  "presets": [
+    "es2015",
+    ["env", {
+      "targets": {
+        "browsers": [
+          "> 5%",
+          "last 2 versions",
+          "not ie < 10",
+          "not op_mini < 9"
+        ]
+      }
+    }]
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "syntax-dynamic-import",
+    "transform-es2015-modules-commonjs"
+  ]
+}

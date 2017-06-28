@@ -1,0 +1,282 @@
+/*
+ * Generic helper classes
+ */
+
+
+// Floating ----------------------------------------------------------------------------------------
+.left {
+    float: left !important;
+}
+
+.right {
+    float: right !important;
+}
+
+/*
+ * Clearfix for modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the 'contenteditable' attribute is included
+ *    anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements that receive the 'clearfix' class.
+ * 2. The use of 'table' rather than 'block' is only necessary if using ':before' to contain the top-margins
+ *    of child elements.
+ */
+.clearfix,
+%clearfix {
+
+    &:before,
+    &:after {
+        content: ' '; /* 1 */
+        display: table; /* 2 */
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin clearfix {
+    @extend %clearfix;
+}
+
+
+// Position ----------------------------------------------------------------------------------------
+.absolute {
+    position: absolute !important;
+}
+
+.relative {
+    position: relative !important;
+}
+
+.fixed {
+    position: fixed !important;
+}
+
+
+// Centering ---------------------------------------------------------------------------------------
+.center--mx,
+%center--mx {
+    margin: 0 auto;
+}
+
+@mixin center--mx {
+    @extend %center--mx;
+}
+
+.center--x,
+%center--x {
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+@mixin center--x {
+    @extend %center--x;
+}
+
+.center--y,
+%center--y {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin center--y {
+    @extend %center--y;
+}
+
+.center--xy,
+%center--xy {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin center--xy {
+    // @extend %center--xy;
+    // quickfix
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+// Text --------------------------------------------------------------------------------------------
+.text--larger {
+    font-size: $font-size--larger;
+}
+
+.text--bold {
+    font-weight: bold !important;
+}
+
+.text--normal {
+    font-weight: normal !important;
+}
+
+.text--left {
+    text-align: left !important;
+}
+
+.text--right {
+    text-align: right !important;
+}
+
+.text--centered {
+    margin-left: auto;
+    margin-right: auto;
+    /* stylelint-disable declaration-no-important */
+    /* intended trump */
+    text-align: center !important;
+    /* stylelint-enable */
+}
+
+.nowrap {
+    white-space: nowrap !important;
+}
+
+.text--lighter {
+    color: $text--lighter !important;
+}
+
+.text--lightest {
+    color: $text--lightest !important;
+}
+
+.text--error {
+    color: $status--red !important;
+}
+
+@mixin truncate-text() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.truncate-text {
+    @include truncate-text;
+}
+
+/* see https://justmarkup.com/log/2015/07/dealing-with-long-words-in-css/ */
+@mixin hyphenate() {
+    /* stylelint-disable no-unsupported-browser-features */
+    /* this does use features that might not be available in some browsers, but there is no technical alternative */
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    /* stylelint-enable */
+}
+
+.hyphenate {
+    @include hyphenate;
+}
+
+
+// Display -----------------------------------------------------------------------------------------
+.block {
+    display: block !important;
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.inline {
+    display: inline !important;
+}
+
+.none {
+    display: none !important;
+}
+
+.full-height {
+    display: flex !important;
+    flex: 1;
+    flex-direction: column;
+}
+
+.valign--middle {
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+.valign--top {
+    display: inline-block !important;
+    vertical-align: top !important;
+}
+
+.valign--bottom {
+    display: inline-block !important;
+    vertical-align: bottom !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+%visuallyhidden {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: .1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: .1px;
+}
+
+@mixin visuallyhidden() {
+    @extend %visuallyhidden;
+}
+
+// helper class for visuallyhidden
+.visuallyhidden,
+.is-visuallyhidden {
+    @extend %visuallyhidden;
+}
+
+
+// Printing ----------------------------------------------------------------------------------------
+// print style mixins
+@mixin dont-print {
+    @media print {
+        /* stylelint-disable declaration-no-important */
+        /* intended trump: this is a helper class to make things NOT print */
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        /* stylelint-enable */
+    }
+}
+
+@mixin do-print {
+    @media print {
+        /* stylelint-disable declaration-no-important */
+        /* intended trump: this is a helper class to print otherwise hidden things */
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        /* stylelint-enable */
+    }
+}
+
+@mixin do-print-only {
+    @media screen {
+        /* stylelint-disable declaration-no-important */
+        /* intended trump: this is a helper class to hide things on screen, but display on printout */
+        display: none !important;
+        /* stylelint-enable */
+    }
+
+    @media print {
+        /* stylelint-disable declaration-no-important */
+        /* intended trump: this is a helper class to hide things on screen, but display on printout */
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        /* stylelint-enable */
+    }
+}

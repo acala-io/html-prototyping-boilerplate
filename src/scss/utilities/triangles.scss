@@ -1,0 +1,39 @@
+/*
+ * Triangle mixin.
+ *
+ * @param $direction    [down, up, right, left]
+ * @param $color        ...
+ * @param $size         ...
+ */
+
+@mixin triangle($direction, $color: currentcolor, $size: 1em) {
+    @if not index(down up right left, $direction) {
+        @error 'Direction must be one of [down, up, right, left].';
+    }
+
+    border-style: solid;
+    border-width: $size;
+    content: '';
+    height: 0;
+    width: 0;
+
+    @if $direction == down {
+        border-bottom-width: $size * 1.5;
+        border-color: $transparent $transparent $color $transparent;
+    }
+
+    @else if $direction == up {
+        border-color: $color $transparent $transparent $transparent;
+        border-top-width: $size * 1.5;
+    }
+
+    @else if $direction == right {
+        border-color: $transparent $transparent $transparent $color;
+        border-right-width: $size * 1.25;
+    }
+
+    @else if $direction == left {
+        border-color: $transparent $color $transparent $transparent;
+        border-left-width: $size * 1.25;
+    }
+}
